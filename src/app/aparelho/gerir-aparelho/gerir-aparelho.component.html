@@ -1,0 +1,51 @@
+<div>
+  <h2>{{ modoCadastro ? 'Cadastrar novo aparelho' : 'Informações do aparelho' }}</h2>
+  <form class="inputs">
+    <mat-form-field class="inputs">
+      <mat-label>Nome</mat-label>
+      <input name="nome" matInput [(ngModel)]="aparelhoAlterado.nome">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Modelo</mat-label>
+      <input name="modelo" matInput [(ngModel)]="aparelhoAlterado.modelo">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Fabricantes</mat-label>
+      <mat-select [(value)]="aparelhoAlterado.fabricante">
+        <mat-option *ngFor="let fabricante of fabricantes" [value]="fabricante._id">
+          {{fabricante.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="inputs">
+      <mat-label>Ficha Técnica</mat-label>
+      <input name="ficha" matInput placeholder="https://www.gsmarena.com/" [(ngModel)]="aparelhoAlterado.fichaTecnica">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Site Oficial</mat-label>
+      <input name="site" matInput [(ngModel)]="aparelhoAlterado.siteOficial">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Observações</mat-label>
+      <textarea name="obs" matInput [(ngModel)]="aparelhoAlterado.observacao" style="resize: none;" rows="3"></textarea>
+    </mat-form-field><br>
+  </form>
+
+  <button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarAparelho()">
+    <i class="fas fa-fw fa-check"></i> Cadastrar Aparelho
+  </button>
+  <button *ngIf="!modoCadastro" mat-raised-button color="primary" (click)="alterarAparelho()">
+    <i class="fas fa-fw fa-check"></i> Salvar Alterações
+  </button>&nbsp;&nbsp;
+  <button *ngIf="!modoCadastro" mat-raised-button color="warn" (click)="deletarAparelho()">
+    <i class="fas fa-fw fa-trash"></i> Excluir
+  </button>&nbsp;&nbsp;
+  <button mat-raised-button (click)="fechar()">
+    <i class="fas fa-fw fa-times"></i> Fechar
+  </button>
+</div>

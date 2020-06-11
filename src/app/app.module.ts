@@ -1,22 +1,37 @@
+import { HttpClientModule } from '@angular/common/http';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ClienteModule } from './cliente/cliente.module';
+import { FabricanteModule } from './fabricante/fabricante.module';
+import { AparelhoModule } from './aparelho/aparelho.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+registerLocaleData(localePt);
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     AppRoutingModule,
-    MatProgressSpinnerModule,
-    BrowserAnimationsModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ClienteModule,
+    FabricanteModule,
+    AparelhoModule,
+    DashboardModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-br' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

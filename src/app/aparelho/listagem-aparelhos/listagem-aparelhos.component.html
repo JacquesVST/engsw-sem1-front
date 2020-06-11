@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="header">
+    <br>
+    <h2>Aparelhos</h2>
+  </div>
+
+  <mat-form-field style="width:100%">
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilter($event)">
+  </mat-form-field>
+  <table *ngIf="aparelhos" mat-table [dataSource]="dados">
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let aparelho"> {{aparelho.nome}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="modelo">
+      <th mat-header-cell *matHeaderCellDef> Modelo </th>
+      <td mat-cell *matCellDef="let aparelho"> {{aparelho.modelo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fabricante">
+      <th mat-header-cell *matHeaderCellDef> Fabricante </th>
+      <td mat-cell *matCellDef="let aparelho"> {{aparelho.fabricante.nome}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fichaTecnica">
+      <th mat-header-cell *matHeaderCellDef> Ficha Técnica </th>
+      <td mat-cell *matCellDef="let aparelho"> {{aparelho.fichaTecnica}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;">
+        <button mat-button color="primary" (click)="openDialog()">
+          Cadastarar <i class="fas fa-fw fa-plus"></i>
+        </button>
+      </th>
+      <td mat-cell *matCellDef="let aparelho" style="text-align: center;">
+        <button mat-button color="primary" (click)="openDialog(aparelho)">
+          Gerenciar <i class="fas fa-fw fa-external-link-alt"></i>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div *ngIf="aparelhos.length === 0">Nenhum aparelho a exibir</div>
+
+</div>

@@ -1,0 +1,49 @@
+<div>
+  <h2>{{ modoCadastro ? 'Cadastrar novo cliente' : 'Informações do cliente' }}</h2>
+  <form class="inputs">
+    <mat-form-field class="inputs">
+      <mat-label>Nome</mat-label>
+      <input name="nome" matInput [(ngModel)]="clienteAlterado.nome">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>E-Mail</mat-label>
+      <input type="email" name="email" matInput placeholder="999.999.999-99" [(ngModel)]="clienteAlterado.email">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>CPF</mat-label>
+      <input name="cpf" matInput placeholder="999.999.999-99" [(ngModel)]="clienteAlterado.cpf" [mask]="maskCPF"
+        maxlength="14">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Data de Nascimento</mat-label>
+      <input type="date" name="nasc" matInput [(ngModel)]="clienteAlterado.dataNascimento">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Telefone</mat-label>
+      <input name="telefone" matInput placeholder="(99)99999-9999" [(ngModel)]="clienteAlterado.telefone"
+        [mask]="maskTelefone" maxlength="14">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Observações</mat-label>
+      <textarea name="obs" matInput [(ngModel)]="clienteAlterado.observacao" style="resize: none;" rows="3"></textarea>
+    </mat-form-field><br>
+  </form>
+
+  <button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarCliente()">
+    <i class="fas fa-fw fa-check"></i> Cadastrar Cliente
+  </button>
+  <button *ngIf="!modoCadastro" mat-raised-button color="primary" (click)="alterarCliente()">
+    <i class="fas fa-fw fa-check"></i> Salvar Alterações
+  </button>&nbsp;&nbsp;
+  <button *ngIf="!modoCadastro" mat-raised-button color="warn" (click)="deletarCliente()">
+    <i class="fas fa-fw fa-trash"></i> Excluir
+  </button>&nbsp;&nbsp;
+  <button mat-raised-button (click)="fechar()">
+    <i class="fas fa-fw fa-times"></i> Fechar
+  </button>
+</div>

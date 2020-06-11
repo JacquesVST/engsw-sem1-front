@@ -1,0 +1,42 @@
+<div>
+  <h2>{{ modoCadastro ? 'Cadastrar novo fabricante' : 'Informações do fabricante' }}</h2>
+  <form class="inputs">
+    <mat-form-field class="inputs">
+      <mat-label>Nome</mat-label>
+      <input name="nome" matInput [(ngModel)]="fabricanteAlterado.nome">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Site Oficial</mat-label>
+      <input name="site" matInput [(ngModel)]="fabricanteAlterado.siteOficial">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Contato Principal</mat-label>
+      <input name="contato1" matInput [(ngModel)]="fabricanteAlterado.contatoPrincipal">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Contato Secundário</mat-label>
+      <input name="contato2" matInput [(ngModel)]="fabricanteAlterado.contatoSecundario">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Observações</mat-label>
+      <textarea name="obs" matInput [(ngModel)]="fabricanteAlterado.observacao" style="resize: none;" rows="3"></textarea>
+    </mat-form-field><br>
+  </form>
+
+  <button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarFabricante()">
+    <i class="fas fa-fw fa-check"></i> Cadastrar Fabricante
+  </button>
+  <button *ngIf="!modoCadastro" mat-raised-button color="primary" (click)="alterarFabricante()">
+    <i class="fas fa-fw fa-check"></i> Salvar Alterações
+  </button>&nbsp;&nbsp;
+  <button *ngIf="!modoCadastro" mat-raised-button color="warn" (click)="deletarFabricante()">
+    <i class="fas fa-fw fa-trash"></i> Excluir
+  </button>&nbsp;&nbsp;
+  <button mat-raised-button (click)="fechar()">
+    <i class="fas fa-fw fa-times"></i> Fechar
+  </button>
+</div>

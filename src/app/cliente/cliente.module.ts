@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMaskModule } from 'ngx-mask';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [ListagemClientesComponent, GerirClienteComponent],
@@ -28,6 +29,7 @@ import { NgxMaskModule } from 'ngx-mask';
     FormsModule,
     MatSnackBarModule,
     MatDatepickerModule,
+    RouterModule,
     NgxMaskModule.forRoot(),
   ]
 })

@@ -1,22 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ListagemProblemasComponent } from './listagem-problemas/listagem-problemas.component';
+import { GerirProblemaComponent } from './gerir-problema/gerir-problema.component';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-import { NgxMaskModule } from 'ngx-mask';
-import { GerirFabricanteComponent } from './gerir-fabricante/gerir-fabricante.component';
-import { ListagemFabricantesComponent } from './listagem-fabricantes/listagem-fabricantes.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
+import { NgxMaskModule } from 'ngx-mask';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
-  declarations: [ListagemFabricantesComponent, GerirFabricanteComponent],
+  declarations: [ListagemProblemasComponent, GerirProblemaComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -29,11 +31,10 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     MatSnackBarModule,
     MatDatepickerModule,
+    MatDividerModule,
+    MatListModule,
     RouterModule,
     NgxMaskModule.forRoot(),
-  ],
-  exports: [
-    GerirFabricanteComponent
   ]
 })
-export class FabricanteModule { }
+export class ProblemaModule { }

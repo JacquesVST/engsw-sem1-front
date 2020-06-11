@@ -1,6 +1,6 @@
 <div>
   <h2>{{ modoCadastro ? 'Cadastrar novo fabricante' : 'Informações do fabricante' }}</h2>
-  <form class="inputs">
+  <form class="inputs" autocomplete="off">
     <mat-form-field class="inputs">
       <mat-label>Nome</mat-label>
       <input name="nome" matInput [(ngModel)]="fabricanteAlterado.nome">

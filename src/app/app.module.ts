@@ -11,6 +11,7 @@ import { AparelhoModule } from './aparelho/aparelho.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { ProblemaModule } from './problema/problema.module';
 
 registerLocaleData(localePt);
 
@@ -27,6 +28,7 @@ registerLocaleData(localePt);
     ClienteModule,
     FabricanteModule,
     AparelhoModule,
+    ProblemaModule,
     DashboardModule
   ],
   providers: [

@@ -7,13 +7,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
 import { NgxMaskModule } from 'ngx-mask';
 import { GerirAparelhoComponent } from './gerir-aparelho/gerir-aparelho.component';
 import { ListagemAparelhosComponent } from './listagem-aparelhos/listagem-aparelhos.component';
-import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [ListagemAparelhosComponent, GerirAparelhoComponent],
@@ -30,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatSnackBarModule,
     MatDatepickerModule,
     MatSelectModule,
+    RouterModule,
     NgxMaskModule.forRoot(),
   ]
 })

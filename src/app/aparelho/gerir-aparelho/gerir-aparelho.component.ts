@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Fabricante } from 'src/app/fabricante/shared/model/fabricante.model';
 import { FabricanteService } from 'src/app/fabricante/shared/service/fabricante.service';
 import { Aparelho } from '../shared/model/aparelho.model';
 import { AparelhoService } from '../shared/service/aparelho.service';
 import { AparelhoDTO } from '../shared/model/aparelhoDTO.model';
+import { GerirFabricanteComponent } from 'src/app/fabricante/gerir-fabricante/gerir-fabricante.component';
 
 @Component({
   selector: 'app-gerir-aparelho',
@@ -17,12 +18,11 @@ export class GerirAparelhoComponent implements OnInit {
   public fabricantes: Fabricante[] = [];
   public aparelhoAlterado: AparelhoDTO = new AparelhoDTO();
   public modoCadastro: boolean;
-  public maskTelefone = '(00)00000-0000';
-  public maskCPF = '000.000.000-00';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public aparelho: Aparelho,
     private aparelhoService: AparelhoService,
+    private dialog: MatDialog,
     private fabricanteService: FabricanteService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<GerirAparelhoComponent>) { }
@@ -82,7 +82,15 @@ export class GerirAparelhoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public converterAparelho(aparelho: Aparelho): AparelhoDTO{
+  public openDialog(fabricante: Fabricante = new Fabricante()) {
+    const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: fabricante });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.listarFabricantes();
+    });
+  }
+
+  public converterAparelho(aparelho: Aparelho): AparelhoDTO {
     const aparelhoDTO: AparelhoDTO = new AparelhoDTO();
     aparelhoDTO._id = aparelho._id;
     aparelhoDTO.nome = aparelho.nome;

@@ -7,30 +7,30 @@
   </div>
   <div class="header-pagina">
     <br>
-    <h2>Fabricantes</h2>
+    <h2>Problemas</h2>
   </div>
 
   <mat-form-field style="width:100%">
     <mat-label>Filtrar</mat-label>
     <input matInput (keyup)="applyFilter($event)">
   </mat-form-field>
-  <table *ngIf="fabricantes" mat-table [dataSource]="dados">
+  <table *ngIf="problemas" mat-table [dataSource]="dados">
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef> Nome </th>
-      <td mat-cell *matCellDef="let fabricante"> {{fabricante.nome}} </td>
+    <ng-container matColumnDef="descricao">
+      <th mat-header-cell *matHeaderCellDef> Descricao </th>
+      <td mat-cell *matCellDef="let problema"> {{problema.descricao}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="site">
-      <th mat-header-cell *matHeaderCellDef> Site oficial </th>
-      <td mat-cell *matCellDef="let fabricante"> {{fabricante.siteOficial}} </td>
+    <ng-container matColumnDef="procedimentos">
+      <th mat-header-cell *matHeaderCellDef> Procedimentos </th>
+      <td mat-cell *matCellDef="let problema"> {{problema.procedimentos.length}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="contato">
-      <th mat-header-cell *matHeaderCellDef> Contato Principal </th>
-      <td mat-cell *matCellDef="let fabricante"> {{fabricante.contatoPrincipal}} </td>
+    <ng-container matColumnDef="observacoes">
+      <th mat-header-cell *matHeaderCellDef> Observações </th>
+      <td mat-cell *matCellDef="let problema"> {{problema.observacao}} </td>
     </ng-container>
 
     <ng-container matColumnDef="acoes">
@@ -39,8 +39,8 @@
           Cadastarar <i class="fas fa-fw fa-plus"></i>
         </button>
       </th>
-      <td mat-cell *matCellDef="let fabricante" style="text-align: center;">
-        <button mat-button color="primary" (click)="openDialog(fabricante)">
+      <td mat-cell *matCellDef="let problema" style="text-align: center;">
+        <button mat-button color="primary" (click)="openDialog(problema)">
           Gerenciar <i class="fas fa-fw fa-external-link-alt"></i>
         </button>
       </td>
@@ -49,6 +49,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div *ngIf="fabricantes.length === 0">Nenhum fabricante a exibir</div>
+  <div *ngIf="problemas.length === 0">Nenhum problema a exibir</div>
 
 </div>

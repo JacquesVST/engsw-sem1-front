@@ -1,6 +1,6 @@
 <div>
   <h2>{{ modoCadastro ? 'Cadastrar novo aparelho' : 'Informações do aparelho' }}</h2>
-  <form class="inputs">
+  <form class="inputs" autocomplete="off">
     <mat-form-field class="inputs">
       <mat-label>Nome</mat-label>
       <input name="nome" matInput [(ngModel)]="aparelhoAlterado.nome">
@@ -11,14 +11,18 @@
       <input name="modelo" matInput [(ngModel)]="aparelhoAlterado.modelo">
     </mat-form-field><br>
 
-    <mat-form-field class="inputs">
-      <mat-label>Fabricantes</mat-label>
-      <mat-select [(value)]="aparelhoAlterado.fabricante">
-        <mat-option *ngFor="let fabricante of fabricantes" [value]="fabricante._id">
-          {{fabricante.nome}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div>
+      <mat-form-field class="dropdown">
+        <mat-label>Fabricantes</mat-label>
+        <mat-select [(value)]="aparelhoAlterado.fabricante">
+          <mat-option *ngFor="let fabricante of fabricantes" [value]="fabricante._id">
+            {{fabricante.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+        <a mat-button color="primary" (click)="openDialog(aparelho.fabricante)"><i class="fas fa-fw fa-external-link-alt"></i></a>
+    </div>
+
 
     <mat-form-field class="inputs">
       <mat-label>Ficha Técnica</mat-label>

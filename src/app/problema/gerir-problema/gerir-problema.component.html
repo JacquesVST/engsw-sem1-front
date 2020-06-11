@@ -1,0 +1,52 @@
+<div>
+  <h2>{{ modoCadastro ? 'Cadastrar novo problema' : 'Informações do problema' }}</h2>
+  <form class="inputs" autocomplete="off">
+    <mat-form-field class="inputs">
+      <mat-label>Descrição</mat-label>
+      <input name="descricao" matInput [(ngModel)]="problemaAlterado.descricao">
+    </mat-form-field><br>
+
+    <mat-label>Procedimentos: {{problemaAlterado.procedimentos.length}}</mat-label>
+    <mat-nav-list>
+      <div *ngFor="let procedimento of problemaAlterado.procedimentos; let i = index">
+        <div class="dropdown" style="display: inline-block;">
+          <a mat-list-item>
+            {{ i + 1 }} - {{ procedimento }}
+          </a>
+        </div>
+        <div style="display: inline-block;">
+          <a mat-button color="primary" (click)="removerProcedimento(procedimento)"><i
+              class="fas fa-fw fa-minus"></i></a>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <br>
+    </mat-nav-list>
+
+    <div>
+      <mat-form-field class="dropdown">
+        <mat-label>Adicionar procedimento</mat-label>
+        <input name="procedimento" matInput [(ngModel)]="novoProcedimento">
+      </mat-form-field>
+      <a mat-button color="primary" (click)="adicionarProcedimento()"><i class="fas fa-fw fa-plus"></i></a>
+    </div>
+
+    <mat-form-field class="inputs">
+      <mat-label>Observações</mat-label>
+      <textarea name="obs" matInput [(ngModel)]="problemaAlterado.observacao" style="resize: none;" rows="3"></textarea>
+    </mat-form-field><br>
+  </form>
+
+  <button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarProblema()">
+    <i class="fas fa-fw fa-check"></i> Cadastrar Problema
+  </button>
+  <button *ngIf="!modoCadastro" mat-raised-button color="primary" (click)="alterarProblema()">
+    <i class="fas fa-fw fa-check"></i> Salvar Alterações
+  </button>&nbsp;&nbsp;
+  <button *ngIf="!modoCadastro" mat-raised-button color="warn" (click)="deletarProblema()">
+    <i class="fas fa-fw fa-trash"></i> Excluir
+  </button>&nbsp;&nbsp;
+  <button mat-raised-button (click)="fechar()">
+    <i class="fas fa-fw fa-times"></i> Fechar
+  </button>
+</div>

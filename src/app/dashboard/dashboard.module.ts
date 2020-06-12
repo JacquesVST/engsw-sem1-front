@@ -5,7 +5,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
@@ -13,7 +13,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     MatGridListModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule
   ],
   exports: [
     DashboardComponent

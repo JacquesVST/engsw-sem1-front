@@ -14,9 +14,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
 import { NgxMaskModule } from 'ngx-mask';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatListModule} from '@angular/material/list';
-
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [ListagemProblemasComponent, GerirProblemaComponent],
   imports: [
@@ -34,6 +34,7 @@ import {MatListModule} from '@angular/material/list';
     MatDividerModule,
     MatListModule,
     RouterModule,
+    MatTooltipModule,
     NgxMaskModule.forRoot(),
   ]
 })

@@ -14,6 +14,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMaskModule } from 'ngx-mask';
 import { RouterModule } from '@angular/router';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [ListagemClientesComponent, GerirClienteComponent],
@@ -30,6 +31,7 @@ import { RouterModule } from '@angular/router';
     MatSnackBarModule,
     MatDatepickerModule,
     RouterModule,
+    MatTooltipModule,
     NgxMaskModule.forRoot(),
   ]
 })

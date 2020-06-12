@@ -22,8 +22,8 @@ export class GerirAparelhoComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public aparelho: Aparelho,
     private aparelhoService: AparelhoService,
-    private dialog: MatDialog,
     private fabricanteService: FabricanteService,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<GerirAparelhoComponent>) { }
 
@@ -82,12 +82,19 @@ export class GerirAparelhoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public openDialog(fabricante: Fabricante = new Fabricante()) {
-    const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: fabricante });
+  public openDialogFabricante(fabricante: any = new Fabricante()): void {
+    this.fabricanteService.buscarFabricante(fabricante)
+      .subscribe(response => {
+        fabricante = response['fabricante'];
+      }, () => {
+        fabricante = new Fabricante();
+      }).add(() => {
+        const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: fabricante });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.listarFabricantes();
-    });
+        dialogRef.afterClosed().subscribe(() => {
+          this.listarFabricantes();
+        });
+      });
   }
 
   public converterAparelho(aparelho: Aparelho): AparelhoDTO {

@@ -25,7 +25,9 @@
 
     <ng-container matColumnDef="site">
       <th mat-header-cell *matHeaderCellDef> Site oficial </th>
-      <td mat-cell *matCellDef="let fabricante"> {{fabricante.siteOficial}} </td>
+      <td mat-cell *matCellDef="let fabricante">
+        <a [href]="'http://' + obterSite(fabricante.siteOficial)" target="_blank"> {{fabricante.siteOficial}} </a>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="contato">

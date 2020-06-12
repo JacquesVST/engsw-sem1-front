@@ -10,8 +10,9 @@ import { FabricanteModule } from './fabricante/fabricante.module';
 import { AparelhoModule } from './aparelho/aparelho.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { registerLocaleData } from '@angular/common';
-import localePt from '@angular/common/locales/pt';
 import { ProblemaModule } from './problema/problema.module';
+import localePt from '@angular/common/locales/pt';
+import { ServicoModule } from './servico/servico.module';
 
 registerLocaleData(localePt);
 
@@ -29,6 +30,7 @@ registerLocaleData(localePt);
     FabricanteModule,
     AparelhoModule,
     ProblemaModule,
+    ServicoModule,
     DashboardModule
   ],
   providers: [

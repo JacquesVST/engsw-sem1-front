@@ -52,4 +52,9 @@ export class ListagemFabricantesComponent implements OnInit {
     });
   }
 
+  public obterSite(site: string): string{
+    site.replace('http://', '');
+    site.replace('https://', '');
+    return site;
+  }
 }

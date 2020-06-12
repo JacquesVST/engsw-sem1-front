@@ -20,14 +20,17 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-        <a mat-button color="primary" (click)="openDialog(aparelho.fabricante)"><i class="fas fa-fw fa-external-link-alt"></i></a>
+        <a mat-button color="primary" (click)="openDialogFabricante(aparelhoAlterado.fabricante)" matTooltip="Ver página de detalhes do fabricante"><i class="fas fa-fw fa-external-link-alt"></i></a>
+        <a mat-button color="primary" (click)="openDialogFabricante()" matTooltip="Cadastrar novo fabricante"><i class="fas fa-fw fa-plus"></i></a>
     </div>
 
 
-    <mat-form-field class="inputs">
+    <mat-form-field class="link">
       <mat-label>Ficha Técnica</mat-label>
       <input name="ficha" matInput placeholder="https://www.gsmarena.com/" [(ngModel)]="aparelhoAlterado.fichaTecnica">
-    </mat-form-field><br>
+    </mat-form-field>
+    <a mat-button color="primary" href="https://www.gsmarena.com/" matTooltip="Consultar GSMArena"><i class="fas fa-fw fa-question"></i></a>
+    <br>
 
     <mat-form-field class="inputs">
       <mat-label>Site Oficial</mat-label>

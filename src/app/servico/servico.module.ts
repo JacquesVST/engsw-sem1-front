@@ -14,10 +14,11 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { GerirAparelhoComponent } from './gerir-aparelho/gerir-aparelho.component';
-import { ListagemAparelhosComponent } from './listagem-aparelhos/listagem-aparelhos.component';
+import { GerirServicoComponent } from './gerir-servico/gerir-servico.component';
+import { ListagemServicosComponent } from './listagem-servicos/listagem-servicos.component';
+
 @NgModule({
-  declarations: [ListagemAparelhosComponent, GerirAparelhoComponent],
+  declarations: [ListagemServicosComponent, GerirServicoComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -36,4 +37,4 @@ import { ListagemAparelhosComponent } from './listagem-aparelhos/listagem-aparel
     NgxMaskModule.forRoot(),
   ]
 })
-export class AparelhoModule { }
+export class ServicoModule { }

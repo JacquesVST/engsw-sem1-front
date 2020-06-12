@@ -14,7 +14,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { GerirFabricanteComponent } from './gerir-fabricante/gerir-fabricante.component';
 import { ListagemFabricantesComponent } from './listagem-fabricantes/listagem-fabricantes.component';
 import { RouterModule } from '@angular/router';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [ListagemFabricantesComponent, GerirFabricanteComponent],
   imports: [
@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
     MatSnackBarModule,
     MatDatepickerModule,
     RouterModule,
+    MatTooltipModule,
     NgxMaskModule.forRoot(),
   ],
   exports: [

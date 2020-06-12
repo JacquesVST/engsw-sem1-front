@@ -35,7 +35,9 @@
 
     <ng-container matColumnDef="fichaTecnica">
       <th mat-header-cell *matHeaderCellDef> Ficha Técnica </th>
-      <td mat-cell *matCellDef="let aparelho"> {{aparelho.fichaTecnica}} </td>
+      <td mat-cell *matCellDef="let aparelho">
+        <a [href]="'http://' + obterSite(aparelho.fichaTecnica)" target="_blank"> {{aparelho.fichaTecnica}} </a>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="acoes">

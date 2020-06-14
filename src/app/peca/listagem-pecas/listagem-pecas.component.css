@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+
+.container {
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.header-pagina {
+  width: calc(100% - 91px);
+  text-align: center;
+}
+
+.botao-voltar {
+  float: left;
+}

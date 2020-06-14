@@ -82,19 +82,23 @@ export class GerirAparelhoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public openDialogFabricante(fabricante: any = new Fabricante()): void {
-    this.fabricanteService.buscarFabricante(fabricante)
-      .subscribe(response => {
-        fabricante = response['fabricante'];
-      }, () => {
-        fabricante = new Fabricante();
-      }).add(() => {
-        const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: fabricante });
+  public openDialogFabricante(idFabricante: string = null): void {
+    if (idFabricante) {
+      this.fabricanteService.buscarFabricante(idFabricante)
+        .subscribe(response => {
+          const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: response['fabricante'] });
 
-        dialogRef.afterClosed().subscribe(() => {
-          this.listarFabricantes();
+          dialogRef.afterClosed().subscribe(() => {
+            this.listarFabricantes();
+          });
         });
+    } else {
+      const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: new Fabricante() });
+
+      dialogRef.afterClosed().subscribe(() => {
+        this.listarFabricantes();
       });
+    }
   }
 
   public converterAparelho(aparelho: Aparelho): AparelhoDTO {

@@ -1,21 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Fabricante } from 'src/app/fabricante/shared/model/fabricante.model';
-import { FabricanteService } from 'src/app/fabricante/shared/service/fabricante.service';
-import { Servico } from '../shared/model/servico.model';
-import { ServicoService } from '../shared/service/servico.service';
-import { ServicoDTO } from '../shared/model/servicoDTO.model';
-import { GerirFabricanteComponent } from 'src/app/fabricante/gerir-fabricante/gerir-fabricante.component';
-import { AparelhoService } from 'src/app/aparelho/shared/service/aparelho.service';
-import { ClienteService } from 'src/app/cliente/shared/service/cliente.service';
-import { ProblemaService } from 'src/app/problema/shared/service/problema.service';
-import { Cliente } from 'src/app/cliente/shared/model/cliente.model';
-import { Aparelho } from 'src/app/aparelho/shared/model/aparelho.model';
-import { Problema } from 'src/app/problema/shared/model/problema.model';
-import { GerirClienteComponent } from 'src/app/cliente/gerir-cliente/gerir-cliente.component';
 import { GerirAparelhoComponent } from 'src/app/aparelho/gerir-aparelho/gerir-aparelho.component';
+import { Aparelho } from 'src/app/aparelho/shared/model/aparelho.model';
+import { AparelhoService } from 'src/app/aparelho/shared/service/aparelho.service';
+import { GerirClienteComponent } from 'src/app/cliente/gerir-cliente/gerir-cliente.component';
+import { Cliente } from 'src/app/cliente/shared/model/cliente.model';
+import { ClienteService } from 'src/app/cliente/shared/service/cliente.service';
 import { GerirProblemaComponent } from 'src/app/problema/gerir-problema/gerir-problema.component';
+import { Problema } from 'src/app/problema/shared/model/problema.model';
+import { ProblemaService } from 'src/app/problema/shared/service/problema.service';
+import { Servico } from '../shared/model/servico.model';
+import { ServicoDTO } from '../shared/model/servicoDTO.model';
+import { ServicoService } from '../shared/service/servico.service';
 
 @Component({
   selector: 'app-gerir-servico',
@@ -117,49 +114,61 @@ export class GerirServicoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public openDialogCliente(cliente: any = new Cliente()): void {
-    this.clienteService.buscarCliente(cliente)
-      .subscribe(response => {
-        cliente = response['cliente'];
-      }, () => {
-        cliente = new Cliente();
-      }).add(() => {
-        const dialogRef = this.dialog.open(GerirClienteComponent, { data: cliente });
+  public openDialogCliente(idCliente: string = null): void {
+    if (idCliente) {
+      this.clienteService.buscarCliente(idCliente)
+        .subscribe(response => {
+          const dialogRef = this.dialog.open(GerirClienteComponent, { data: response['cliente'] });
 
-        dialogRef.afterClosed().subscribe(() => {
-          this.listarClientes();
+          dialogRef.afterClosed().subscribe(() => {
+            this.listarClientes();
+          });
         });
+    } else {
+      const dialogRef = this.dialog.open(GerirClienteComponent, { data: new Cliente() });
+
+      dialogRef.afterClosed().subscribe(() => {
+        this.listarClientes();
       });
+    }
   }
 
-  public openDialogAparelho(aparelho: any = new Aparelho()): void {
-    this.aparelhoService.buscarAparelho(aparelho)
-      .subscribe(response => {
-        aparelho = response['aparelho'];
-      }, () => {
-        aparelho = new Problema();
-      }).add(() => {
-        const dialogRef = this.dialog.open(GerirAparelhoComponent, { data: aparelho });
+  public openDialogAparelho(idAparelho: string = null): void {
+    if (idAparelho) {
+      this.aparelhoService.buscarAparelho(idAparelho)
+        .subscribe(response => {
+          const dialogRef = this.dialog.open(GerirAparelhoComponent, { data: response['aparelho'] });
 
-        dialogRef.afterClosed().subscribe(() => {
-          this.listarAparelhos();
+          dialogRef.afterClosed().subscribe(() => {
+            this.listarAparelhos();
+          });
         });
+    } else {
+      const dialogRef = this.dialog.open(GerirAparelhoComponent, { data: new Aparelho() });
+
+      dialogRef.afterClosed().subscribe(() => {
+        this.listarAparelhos();
       });
+    }
   }
 
-  public openDialogProblema(problema: any = new Problema()): void {
-    this.problemaService.buscarProblema(problema)
-      .subscribe(response => {
-        problema = response['problema'];
-      }, () => {
-        problema = new Problema();
-      }).add(() => {
-        const dialogRef = this.dialog.open(GerirProblemaComponent, { data: problema });
+  public openDialogProblema(idProblema: string = null): void {
+    if (idProblema) {
+      this.problemaService.buscarProblema(idProblema)
+        .subscribe(response => {
+          const dialogRef = this.dialog.open(GerirProblemaComponent, { data: response['problema'] });
 
-        dialogRef.afterClosed().subscribe(() => {
-          this.listarProblemas();
+          dialogRef.afterClosed().subscribe(() => {
+            this.listarProblemas();
+          });
         });
+    } else {
+      const dialogRef = this.dialog.open(GerirProblemaComponent, { data: new Problema() });
+
+      dialogRef.afterClosed().subscribe(() => {
+        this.listarProblemas();
       });
+    }
   }
 
   public converterServico(servico: Servico): ServicoDTO {

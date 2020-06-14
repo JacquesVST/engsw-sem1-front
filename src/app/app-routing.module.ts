@@ -6,6 +6,8 @@ import { ListagemFabricantesComponent } from './fabricante/listagem-fabricantes/
 import { ListagemAparelhosComponent } from './aparelho/listagem-aparelhos/listagem-aparelhos.component';
 import { ListagemProblemasComponent } from './problema/listagem-problemas/listagem-problemas.component';
 import { ListagemServicosComponent } from './servico/listagem-servicos/listagem-servicos.component';
+import { ListagemPecasComponent } from './peca/listagem-pecas/listagem-pecas.component';
+import { ListagemProdutosComponent } from './produto/listagem-produtos/listagem-produtos.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -13,7 +15,9 @@ const routes: Routes = [
   { path: 'fabricante', component: ListagemFabricantesComponent },
   { path: 'aparelho', component: ListagemAparelhosComponent },
   { path: 'problema', component: ListagemProblemasComponent },
-  { path: 'servico', component: ListagemServicosComponent }
+  { path: 'servico', component: ListagemServicosComponent },
+  { path: 'peca', component: ListagemPecasComponent },
+  { path: 'produto', component: ListagemProdutosComponent }
 ];
 
 @NgModule({

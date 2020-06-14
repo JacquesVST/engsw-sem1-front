@@ -1,0 +1,64 @@
+<div>
+  <h2>{{ modoCadastro ? 'Cadastrar novo produto' : 'Informações do produto' }}</h2>
+  <form class="inputs" autocomplete="off">
+    <mat-form-field class="inputs">
+      <mat-label>Descrição</mat-label>
+      <input name="descricao" matInput [(ngModel)]="produtoAlterado.descricao">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Data de Pedido</mat-label>
+      <input type="date" name="pedido" matInput [(ngModel)]="produtoAlterado.dataPedido">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Data de Chegada</mat-label>
+      <input type="date" name="chegada" matInput [(ngModel)]="produtoAlterado.dataChegada">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Custo</mat-label>
+      <input name="custo" matInput [(ngModel)]="produtoAlterado.custo">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Preco</mat-label>
+      <input name="preco" type="number" matInput [(ngModel)]="produtoAlterado.preco">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Categoria</mat-label>
+      <input name="categoria" type="number" matInput [(ngModel)]="produtoAlterado.categoria">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Estoque</mat-label>
+      <input name="estoque" type="number" matInput [(ngModel)]="produtoAlterado.estoque">
+    </mat-form-field><br>
+
+    <mat-form-field class="link">
+      <mat-label>Origem</mat-label>
+      <input name="origem" matInput placeholder="https://www.mercadolivre.com.br/" [(ngModel)]="produtoAlterado.origem">
+    </mat-form-field>
+    <a mat-button color="primary" [href]="produtoAlterado.origem" target="_blank" matTooltip="Visitar" *ngIf="produtoAlterado.origem"><i class="fas fa-fw fa-question"></i></a>
+    <br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Observações</mat-label>
+      <textarea name="obs" matInput [(ngModel)]="produtoAlterado.observacao" style="resize: none;" rows="3"></textarea>
+    </mat-form-field><br>
+  </form>
+
+  <button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarProduto()">
+    <i class="fas fa-fw fa-check"></i> Cadastrar Produto
+  </button>
+  <button *ngIf="!modoCadastro" mat-raised-button color="primary" (click)="alterarProduto()">
+    <i class="fas fa-fw fa-check"></i> Salvar Alterações
+  </button>&nbsp;&nbsp;
+  <button *ngIf="!modoCadastro" mat-raised-button color="warn" (click)="deletarProduto()">
+    <i class="fas fa-fw fa-trash"></i> Excluir
+  </button>&nbsp;&nbsp;
+  <button mat-raised-button (click)="fechar()">
+    <i class="fas fa-fw fa-times"></i> Fechar
+  </button>
+</div>

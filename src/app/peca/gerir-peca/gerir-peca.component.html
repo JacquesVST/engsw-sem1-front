@@ -1,0 +1,81 @@
+<div>
+  <h2>{{ modoCadastro ? 'Cadastrar nova peça' : 'Informações da peça' }}</h2>
+  <form class="inputs" autocomplete="off">
+    <mat-form-field class="inputs">
+      <mat-label>Descrição</mat-label>
+      <input name="descricao" matInput [(ngModel)]="pecaAlterado.descricao">
+    </mat-form-field><br>
+
+    <div>
+      <mat-form-field class="dropdown">
+        <mat-label>Serviço</mat-label>
+        <mat-select [(value)]="pecaAlterado.servico">
+          <mat-option *ngFor="let servico of servicos" [value]="servico._id">
+            {{servico.dataRegistro | date:'dd/MM/yyyy':'UTC'}} - {{servico.aparelho.nome + ' - ' + servico.situacao}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+        <a mat-button color="primary" (click)="openDialogServico(pecaAlterado.servico)" matTooltip="Ver página de detalhes do fabricante"><i class="fas fa-fw fa-external-link-alt"></i></a>
+        <a mat-button color="primary" (click)="openDialogServico()" matTooltip="Cadastrar novo serviço"><i class="fas fa-fw fa-plus"></i></a>
+    </div>
+
+    <mat-form-field class="inputs">
+      <mat-label>Data de Pedido</mat-label>
+      <input type="date" name="pedido" matInput [(ngModel)]="pecaAlterado.dataPedido">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Data de Chegada</mat-label>
+      <input type="date" name="chegada" matInput [(ngModel)]="pecaAlterado.dataChegada">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Categoria</mat-label>
+      <input name="categoria" matInput [(ngModel)]="pecaAlterado.categoria">
+    </mat-form-field><br>
+
+    <mat-form-field class="link">
+      <mat-label>Origem</mat-label>
+      <input name="origem" matInput placeholder="https://www.mercadolivre.com.br/" [(ngModel)]="pecaAlterado.origem">
+    </mat-form-field>
+    <a mat-button color="primary" [href]="pecaAlterado.origem" target="_blank" matTooltip="Visitar" *ngIf="pecaAlterado.origem"><i class="fas fa-fw fa-question"></i></a>
+    <br>
+
+    <div>
+      <mat-form-field class="dropdown">
+        <mat-label>Fabricante</mat-label>
+        <mat-select [(value)]="pecaAlterado.fabricante">
+          <mat-option *ngFor="let fabricante of fabricantes" [value]="fabricante._id">
+            {{fabricante.nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+        <a mat-button color="primary" (click)="openDialogFabricante(pecaAlterado.fabricante)" matTooltip="Ver página de detalhes do fabricante"><i class="fas fa-fw fa-external-link-alt"></i></a>
+        <a mat-button color="primary" (click)="openDialogFabricante()" matTooltip="Cadastrar novo fabricante"><i class="fas fa-fw fa-plus"></i></a>
+    </div>
+
+
+    <mat-form-field class="inputs">
+      <mat-label>Valor</mat-label>
+      <input name="valor" type="number" matInput [(ngModel)]="pecaAlterado.valor">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Observações</mat-label>
+      <textarea name="obs" matInput [(ngModel)]="pecaAlterado.observacao" style="resize: none;" rows="3"></textarea>
+    </mat-form-field><br>
+  </form>
+
+  <button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarPeca()">
+    <i class="fas fa-fw fa-check"></i> Cadastrar Peca
+  </button>
+  <button *ngIf="!modoCadastro" mat-raised-button color="primary" (click)="alterarPeca()">
+    <i class="fas fa-fw fa-check"></i> Salvar Alterações
+  </button>&nbsp;&nbsp;
+  <button *ngIf="!modoCadastro" mat-raised-button color="warn" (click)="deletarPeca()">
+    <i class="fas fa-fw fa-trash"></i> Excluir
+  </button>&nbsp;&nbsp;
+  <button mat-raised-button (click)="fechar()">
+    <i class="fas fa-fw fa-times"></i> Fechar
+  </button>
+</div>

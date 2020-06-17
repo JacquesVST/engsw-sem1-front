@@ -1,18 +1,11 @@
 <div class="container">
-  <div class="botao-voltar">
-    <br>
-    <a mat-stroked-button color="primary" [routerLink]="'/'" routerLinkActive="active">
-      <i class="fas fa-fw fa-arrow-left"></i> Voltar
-    </a>
-  </div>
   <div class="header-pagina">
     <br>
-    <h2>Serviços</h2>
+    <h1>Serviços</h1>
   </div>
-
   <mat-form-field style="width:100%">
     <mat-label><i class="fas fa-fw fa-search"></i> Filtrar</mat-label>
-    <input matInput (keyup)="applyFilter($event)">
+    <input matInput (keyup)="applyFilter($event)" autocomplete="off">
   </mat-form-field>
   <table *ngIf="servicos" mat-table [dataSource]="dados">
     <!--- Note that these columns can be defined in any order.
@@ -59,6 +52,10 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div *ngIf="servicos.length === 0">Nenhum serviço a exibir</div>
+  <div class="header-pagina">
+    <br>
+    <h5 style="color: #3b3b3b">Total de {{servicos.length}} serviços</h5>
+  </div>
+  <!-- <div *ngIf="servicos.length === 0">Nenhum serviço a exibir</div> -->
 
 </div>

@@ -6,6 +6,7 @@
       <mat-form-field class="dropdown">
         <mat-label>Produto</mat-label>
         <mat-select [(value)]="vendaAlterado.produto">
+          <mat-option (click)="vendaAlterado.produto = undefined"></mat-option>
           <mat-option *ngFor="let produto of produtos" [value]="produto._id">
             {{produto.descricao}}
           </mat-option>

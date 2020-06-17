@@ -41,6 +41,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTooltipModule,
     MatTabsModule,
     NgxMaskModule.forRoot(),
+  ],
+  exports: [
+    ListagemServicosComponent
   ]
 })
 export class ServicoModule { }

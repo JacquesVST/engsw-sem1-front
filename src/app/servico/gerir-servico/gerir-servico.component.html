@@ -7,6 +7,7 @@
         <mat-form-field class="dropdown">
           <mat-label>Clientes</mat-label>
           <mat-select [(value)]="servicoAlterado.cliente">
+            <mat-option (click)="servicoAlterado.cliente = undefined"></mat-option>
             <mat-option *ngFor="let cliente of clientes" [value]="cliente._id">
               {{cliente.nome}}
             </mat-option>
@@ -22,6 +23,7 @@
         <mat-form-field class="dropdown">
           <mat-label>Aparelhos</mat-label>
           <mat-select [(value)]="servicoAlterado.aparelho">
+            <mat-option (click)="servicoAlterado.aparelho = undefined"></mat-option>
             <mat-option *ngFor="let aparelho of aparelhos" [value]="aparelho._id">
               {{aparelho.nome}}
             </mat-option>
@@ -37,6 +39,7 @@
         <mat-form-field class="dropdown">
           <mat-label>Problema</mat-label>
           <mat-select [(value)]="servicoAlterado.problema">
+            <mat-option (click)="servicoAlterado.problema = undefined"></mat-option>
             <mat-option *ngFor="let problema of problemas" [value]="problema._id">
               {{problema.descricao}}
             </mat-option>
@@ -52,6 +55,7 @@
         <mat-form-field class="inputs">
           <mat-label>Situação</mat-label>
           <mat-select [(value)]="servicoAlterado.situacao">
+            <mat-option (click)="servicoAlterado.situacao = undefined"></mat-option>
             <mat-option *ngFor="let sit of situacao" [value]="sit">
               {{sit}}
             </mat-option>
@@ -73,14 +77,20 @@
 
   </mat-tab>
   <mat-tab label="Peças" *ngIf="!modoCadastro">
-    <h2> Lista de peças ({{ pecas.length }})</h2>
+    <span style="text-align:left;float:left;">
 
+      <h2> Lista de peças ({{ pecas.length }})</h2>
+    </span>
+    <span style="text-align:right;float:right;">
+      <a mat-button color="primary" (click)="openDialogNovaPeca()" matTooltip="Adicionar peça"><i
+          class="fas fa-fw fa-plus"></i></a>
+    </span>
     <mat-nav-list>
       <div *ngFor="let peca of pecas; let i = index">
-        <div class="dropdown" style="display: inline-block;">
-          <span mat-list-item>
-            {{ i + 1 }} - {{ peca.descricao }} - {{ peca.preco?peca.preco:peca.valor }}
-          </span>
+        <div class="link" style="display: inline-block;">
+          <a mat-list-item>
+            {{ i + 1 }} - {{ peca.descricao }} - R${{ peca.valor }}
+          </a>
         </div>
         <div style="display: inline-block;">
           <a mat-button color="primary" (click)="openDialogPeca(peca)" matTooltip="Ver detalhes da peça"><i
@@ -92,10 +102,28 @@
     </mat-nav-list>
 
   </mat-tab>
+
   <mat-tab label="Histórico" *ngIf="!modoCadastro">
-    <h2> Histórico da situação</h2>
+    <h2> Histórico da Situação</h2>
+    <mat-nav-list>
+      <div *ngFor="let historico of historicoSituacao; let i = index">
+        <div class="inputs" style="display: inline-block;">
+          <a mat-list-item>
+            {{ historico.data | date:'dd/MM/yyyy':'UTC'}} - {{ historico.situacao }} - {{ historico.observacao }}
+          </a>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <br>
+    </mat-nav-list>
+
   </mat-tab>
 </mat-tab-group>
+
+<div style="width: 100%;text-align: center;" *ngIf="!modoCadastro">
+  <b>Total: R${{servico.valor?servico.valor:0}} (Serviço) + R${{totalPecas()}} (Peças) <span *ngIf="servico.valor">=
+      R${{totalPecas() + servico.valor}}</span></b>
+</div><br>
 
 <button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarServico()">
   <i class="fas fa-fw fa-check"></i> Cadastrar Serviço

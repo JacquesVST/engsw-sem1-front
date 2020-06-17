@@ -33,6 +33,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     RouterModule,
     MatTooltipModule,
     NgxMaskModule.forRoot(),
+  ],exports: [
+    ListagemClientesComponent
   ]
 })
 export class ClienteModule { }

@@ -30,6 +30,7 @@
       <mat-form-field class="inputs">
         <mat-label>Categoria</mat-label>
         <mat-select [(value)]="produtoAlterado.categoria">
+          <mat-option (click)="produtoAlterado.categoria = undefined"></mat-option>
           <mat-option *ngFor="let categoria of categorias" [value]="categoria">
             {{categoria}}
           </mat-option>

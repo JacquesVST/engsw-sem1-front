@@ -34,7 +34,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     NgxMaskModule.forRoot(),
   ],
   exports: [
-    GerirFabricanteComponent
+    ListagemFabricantesComponent
   ]
 })
 export class FabricanteModule { }

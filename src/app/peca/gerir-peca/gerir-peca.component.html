@@ -7,9 +7,10 @@
     </mat-form-field><br>
 
     <div>
-      <mat-form-field class="link">
+      <mat-form-field class="dropdown">
         <mat-label>Serviço</mat-label>
         <mat-select [(value)]="pecaAlterado.servico">
+          <mat-option (click)="pecaAlterado.servico = undefined"></mat-option>
           <mat-option *ngFor="let servico of servicos" [value]="servico._id">
             {{servico.dataRegistro | date:'dd/MM/yyyy':'UTC'}} - {{servico.aparelho.nome + ' - ' + servico.situacao}}
           </mat-option>
@@ -29,22 +30,30 @@
       <input type="date" name="chegada" matInput [(ngModel)]="pecaAlterado.dataChegada">
     </mat-form-field><br>
 
-    <mat-form-field class="inputs">
-      <mat-label>Categoria</mat-label>
-      <input name="categoria" matInput [(ngModel)]="pecaAlterado.categoria">
-    </mat-form-field><br>
+    <div>
+      <mat-form-field class="inputs">
+        <mat-label>Categoria</mat-label>
+        <mat-select [(value)]="pecaAlterado.categoria">
+          <mat-option (click)="pecaAlterado.categoria = undefined"></mat-option>
+          <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+            {{categoria}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
     <mat-form-field class="link">
       <mat-label>Origem</mat-label>
       <input name="origem" matInput placeholder="https://www.mercadolivre.com.br/" [(ngModel)]="pecaAlterado.origem">
     </mat-form-field>
-    <a mat-button color="primary" [href]="pecaAlterado.origem" target="_blank" matTooltip="Visitar" *ngIf="pecaAlterado.origem"><i class="fas fa-fw fa-question"></i></a>
+    <a mat-button color="primary" [href]="pecaAlterado.origem" target="_blank" matTooltip="Visitar" [disabled]="!pecaAlterado.origem"><i class="fas fa-fw fa-question"></i></a>
     <br>
 
     <div>
       <mat-form-field class="dropdown">
         <mat-label>Fabricante</mat-label>
         <mat-select [(value)]="pecaAlterado.fabricante">
+          <mat-option (click)="pecaAlterado.fabricante = undefined"></mat-option>
           <mat-option *ngFor="let fabricante of fabricantes" [value]="fabricante._id">
             {{fabricante.nome}}
           </mat-option>

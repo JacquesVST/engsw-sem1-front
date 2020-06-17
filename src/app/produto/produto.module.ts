@@ -11,9 +11,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgxMaskModule } from 'ngx-mask';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { GerirProdutoComponent } from './gerir-produto/gerir-produto.component';
 import { ListagemProdutosComponent } from './listagem-produtos/listagem-produtos.component';
 
@@ -35,6 +35,8 @@ import { ListagemProdutosComponent } from './listagem-produtos/listagem-produtos
     RouterModule,
     MatTooltipModule,
     NgxMaskModule.forRoot(),
+  ], exports: [
+    ListagemProdutosComponent
   ]
 })
 export class ProdutoModule { }

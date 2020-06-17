@@ -34,6 +34,8 @@ import { ListagemAparelhosComponent } from './listagem-aparelhos/listagem-aparel
     RouterModule,
     MatTooltipModule,
     NgxMaskModule.forRoot(),
+  ],exports:[
+    ListagemAparelhosComponent
   ]
 })
 export class AparelhoModule { }

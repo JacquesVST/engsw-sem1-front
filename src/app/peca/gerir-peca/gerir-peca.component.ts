@@ -20,6 +20,7 @@ export class GerirPecaComponent implements OnInit {
 
   public fabricantes: Fabricante[] = [];
   public servicos: Servico[] = [];
+  public categorias: string[] = [];
   public pecaAlterado: PecaDTO = new PecaDTO();
   public modoCadastro: boolean;
 
@@ -29,9 +30,21 @@ export class GerirPecaComponent implements OnInit {
     private fabricanteService: FabricanteService,
     private servicoService: ServicoService,
     private dialogService: DialogService,
-    private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<GerirPecaComponent>) { }
+    private dialogRef: MatDialogRef<GerirPecaComponent>
+  ) {
+    this.categorias = [
+      'Alto-Falante',
+      'Bateria',
+      'Conector',
+      'Display',
+      'Módulo de Câmera',
+      'Placa-Mãe',
+      'Tampa Traseira',
+      'Vidro Frontal',
+      'Outro'
+    ]
+  }
 
   ngOnInit(): void {
     this.listarFabricantes();
@@ -146,7 +159,7 @@ export class GerirPecaComponent implements OnInit {
     pecaDTO.dataChegada = peca.dataChegada;
     pecaDTO.categoria = peca.categoria;
     pecaDTO.origem = peca.origem;
-    pecaDTO.fabricante = peca.fabricante._id;
+    pecaDTO.fabricante = peca.fabricante ? peca.fabricante._id : null;
     pecaDTO.valor = peca.valor;
     pecaDTO.observacao = peca.observacao;
     return pecaDTO;

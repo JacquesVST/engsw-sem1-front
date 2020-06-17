@@ -10,9 +10,12 @@ import { PecaService } from 'src/app/peca/shared/service/peca.service';
 import { Problema } from 'src/app/problema/shared/model/problema.model';
 import { ProblemaService } from 'src/app/problema/shared/service/problema.service';
 import { DialogService } from 'src/app/shared/service/dialog.service';
+import { HistoricoSituacaoDTO } from '../shared/model/historicosituacaoDTO.model';
 import { Servico } from '../shared/model/servico.model';
 import { ServicoDTO } from '../shared/model/servicoDTO.model';
+import { HistoricoSituacaoService } from '../shared/service/HistoricoSituacao.service';
 import { ServicoService } from '../shared/service/servico.service';
+import { HistoricoSituacao } from '../shared/model/historicosituacao.model';
 
 @Component({
   selector: 'app-gerir-servico',
@@ -26,6 +29,7 @@ export class GerirServicoComponent implements OnInit {
   public problemas: Problema[] = [];
   public situacao: string[] = [];
   public pecas: Peca[] = [];
+  public historicoSituacao: HistoricoSituacao[] = [];
   public servicoAlterado: ServicoDTO = new ServicoDTO();
   public modoCadastro: boolean;
 
@@ -36,6 +40,7 @@ export class GerirServicoComponent implements OnInit {
     private aparelhoService: AparelhoService,
     private problemaService: ProblemaService,
     private pecaService: PecaService,
+    private historicoSituacaoService: HistoricoSituacaoService,
     private dialogService: DialogService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<GerirServicoComponent>
@@ -63,6 +68,7 @@ export class GerirServicoComponent implements OnInit {
       this.modoCadastro = true;
     } else {
       this.listarPecas();
+      this.listarHistoricoSituacao();
     }
     this.servicoAlterado = this.converterServico(this.servico);
   }
@@ -107,6 +113,17 @@ export class GerirServicoComponent implements OnInit {
       });
   }
 
+  public listarHistoricoSituacao(): void {
+    this.historicoSituacaoService.filtrarHistoricoSituacao({ servico: this.servico._id })
+      .subscribe(response => {
+        console.log(response)
+        this.historicoSituacao = response['historicoSituacoes'];
+      }, (err) => {
+        let erro = this.snackBar.open('Erro ao listar pecas do servico');
+        console.log(err);
+      });
+  }
+
   public cadastrarServico(): void {
     this.servicoService.cadastrarServico(this.servicoAlterado)
       .subscribe(response => {
@@ -121,6 +138,20 @@ export class GerirServicoComponent implements OnInit {
   public alterarServico(): void {
     this.servicoService.alterarServico(this.servicoAlterado)
       .subscribe(response => {
+        if (this.servico.situacao !== this.servicoAlterado.situacao) {
+          const historicoSituacaoDTO: HistoricoSituacaoDTO = new HistoricoSituacaoDTO();
+          historicoSituacaoDTO.servico = this.servicoAlterado._id
+          historicoSituacaoDTO.data = new Date();
+          historicoSituacaoDTO.situacao = this.servicoAlterado.situacao;
+          historicoSituacaoDTO.observacao = this.servicoAlterado.observacao;
+          this.historicoSituacaoService.cadastrarHistoricoSituacao(historicoSituacaoDTO)
+            .subscribe(response => {
+              this.listarHistoricoSituacao();
+            }, (err) => {
+              console.log(err);
+              let erro = this.snackBar.open('Erro salvar histórico do serviço');
+            });
+        }
         this.fechar();
         let sucesso = this.snackBar.open('Salvo com sucesso');
       }, (err) => {
@@ -210,6 +241,17 @@ export class GerirServicoComponent implements OnInit {
 
   }
 
+  public openDialogNovaPeca() {
+    const peca: Peca = new Peca();
+    peca.servico = this.servico;
+    const dialogRef = this.dialogService.openDialogPeca(peca);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.listarPecas();
+    });
+
+  }
+
   public converterServico(servico: Servico): ServicoDTO {
     const servicoDTO: ServicoDTO = new ServicoDTO();
     servicoDTO._id = servico._id;
@@ -221,6 +263,14 @@ export class GerirServicoComponent implements OnInit {
     servicoDTO.dataRegistro = servico.dataRegistro;
     servicoDTO.observacao = servico.observacao;
     return servicoDTO;
+  }
+
+  public totalPecas(): number {
+    let total: number = 0;
+    this.pecas.forEach(peca => {
+      total += peca.valor;
+    })
+    return total;
   }
 
 }

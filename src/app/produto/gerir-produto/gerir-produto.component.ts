@@ -28,7 +28,8 @@ export class GerirProdutoComponent implements OnInit {
       'Capas',
       'Carregadores',
       'Películas',
-      'Suportes'
+      'Suportes',
+      'Outro'
     ]
   }
 

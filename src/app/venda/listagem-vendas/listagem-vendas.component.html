@@ -1,18 +1,12 @@
 <div class="container">
-  <div class="botao-voltar">
-    <br>
-    <a mat-stroked-button color="primary" [routerLink]="'/'" routerLinkActive="active">
-      <i class="fas fa-fw fa-arrow-left"></i> Voltar
-    </a>
-  </div>
   <div class="header-pagina">
     <br>
-    <h2>Vendas</h2>
+    <h1>Vendas</h1>
   </div>
 
   <mat-form-field style="width:100%">
     <mat-label><i class="fas fa-fw fa-search"></i> Filtrar</mat-label>
-    <input matInput (keyup)="applyFilter($event)">
+    <input matInput (keyup)="applyFilter($event)" autocomplete="off">
   </mat-form-field>
   <table *ngIf="vendas" mat-table [dataSource]="dados">
     <!--- Note that these columns can be defined in any order.
@@ -54,6 +48,8 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div *ngIf="vendas.length === 0">Nenhuma venda a exibir</div>
-
+  <div class="header-pagina">
+    <br>
+    <h5 style="color: #3b3b3b">Total de {{vendas.length}} vendas</h5>
+  </div>
 </div>

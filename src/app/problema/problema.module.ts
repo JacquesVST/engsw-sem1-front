@@ -1,22 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ListagemProblemasComponent } from './listagem-problemas/listagem-problemas.component';
-import { GerirProblemaComponent } from './gerir-problema/gerir-problema.component';
-import { MatTableModule } from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSortModule } from '@angular/material/sort';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgxMaskModule } from 'ngx-mask';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { GerirProblemaComponent } from './gerir-problema/gerir-problema.component';
+import { ListagemProblemasComponent } from './listagem-problemas/listagem-problemas.component';
 @NgModule({
   declarations: [ListagemProblemasComponent, GerirProblemaComponent],
   imports: [
@@ -36,6 +36,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     RouterModule,
     MatTooltipModule,
     NgxMaskModule.forRoot(),
+  ],
+  exports: [
+    ListagemProblemasComponent
   ]
 })
 export class ProblemaModule { }

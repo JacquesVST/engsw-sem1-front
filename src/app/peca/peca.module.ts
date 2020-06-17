@@ -35,6 +35,9 @@ import { ListagemPecasComponent } from './listagem-pecas/listagem-pecas.componen
     RouterModule,
     MatTooltipModule,
     NgxMaskModule.forRoot(),
+  ],
+  exports: [
+    ListagemPecasComponent
   ]
 })
 export class PecaModule { }

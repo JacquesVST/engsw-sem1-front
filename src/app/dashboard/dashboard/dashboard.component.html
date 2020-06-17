@@ -1,4 +1,4 @@
-<mat-grid-list cols="5" rowHeight="1:1">
+<!-- <mat-grid-list cols="5" rowHeight="1:1" *ngIf="false">
   <mat-grid-tile>
       <mat-card class="card-style">
         <i class="fas fa-fw fa-concierge-bell fa-5x"></i>
@@ -71,4 +71,62 @@
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->
+
+<mat-tab-group dynamicHeight="true" mat-align-tabs="center" backgroundColor="primary">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span style="font-size: 1.5em;"><i class="fas fa-fw fa-concierge-bell"></i> Serviços</span>
+    </ng-template>
+    <app-listagem-servicos></app-listagem-servicos>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span style="font-size: 1.5em;"><i class="fas fa-fw fa-industry"></i> Fabricantes</span>
+    </ng-template>
+    <app-listagem-fabricantes></app-listagem-fabricantes>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span style="font-size: 1.5em;"><i class="fas fa-fw fa-mobile-alt"></i> Aparelhos</span>
+    </ng-template>
+    <app-listagem-aparelhos></app-listagem-aparelhos>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span style="font-size: 1.5em;"><i class="fas fa-fw fa-microchip"></i> Peças</span>
+    </ng-template>
+    <app-listagem-pecas></app-listagem-pecas>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span style="font-size: 1.5em;"><i class="fas fa-fw fa-users"></i> Clientes</span>
+    </ng-template>
+    <app-listagem-clientes></app-listagem-clientes>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span style="font-size: 1.5em;"><i class="fas fa-fw fa-tag"></i> Produtos</span>
+    </ng-template>
+    <app-listagem-produtos></app-listagem-produtos>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span style="font-size: 1.5em;"><i class="fas fa-fw fa-tools"></i> Problemas</span>
+    </ng-template>
+    <app-listagem-problemas></app-listagem-problemas>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span style="font-size: 1.5em;"><i class="fas fa-fw fa-money-check-alt"></i> Vendas</span>
+    </ng-template>
+    <app-listagem-vendas></app-listagem-vendas>
+  </mat-tab>
+</mat-tab-group>

@@ -15,6 +15,7 @@ import { PecaModule } from './peca/peca.module';
 import { ProdutoModule } from './produto/produto.module';
 import localePt from '@angular/common/locales/pt';
 import { ServicoModule } from './servico/servico.module';
+import { VendaModule } from './venda/venda.module';
 
 registerLocaleData(localePt);
 
@@ -35,6 +36,7 @@ registerLocaleData(localePt);
     ServicoModule,
     PecaModule,
     ProdutoModule,
+    VendaModule,
     DashboardModule
   ],
   providers: [

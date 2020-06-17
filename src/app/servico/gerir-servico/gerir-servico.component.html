@@ -1,72 +1,111 @@
-<div>
-  <h2>{{ modoCadastro ? 'Cadastrar novo serviço' : 'Informações do serviço' }}</h2>
-  <form class="inputs" autocomplete="off">
+<mat-tab-group dynamicHeight="true" mat-align-tabs="center">
+  <mat-tab label="Serviço">
+    <h2>{{ modoCadastro ? 'Cadastrar novo serviço' : 'Informações do serviço' }}</h2>
+    <form class="inputs" autocomplete="off">
 
-    <div>
-      <mat-form-field class="dropdown">
-        <mat-label>Clientes</mat-label>
-        <mat-select [(value)]="servicoAlterado.cliente">
-          <mat-option *ngFor="let cliente of clientes" [value]="cliente._id">
-            {{cliente.nome}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-        <a mat-button color="primary" (click)="openDialogCliente(servicoAlterado.cliente)" matTooltip="Ver página de detalhes do cliente"><i class="fas fa-fw fa-external-link-alt"></i></a>
-        <a mat-button color="primary" (click)="openDialogCliente()" matTooltip="Cadastrar novo cliente"><i class="fas fa-fw fa-plus"></i></a>
-    </div>
+      <div>
+        <mat-form-field class="dropdown">
+          <mat-label>Clientes</mat-label>
+          <mat-select [(value)]="servicoAlterado.cliente">
+            <mat-option *ngFor="let cliente of clientes" [value]="cliente._id">
+              {{cliente.nome}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <a mat-button color="primary" (click)="openDialogCliente(servicoAlterado.cliente)"
+          matTooltip="Ver página de detalhes do cliente"><i class="fas fa-fw fa-external-link-alt"></i></a>
+        <a mat-button color="primary" (click)="openDialogCliente()" matTooltip="Cadastrar novo cliente"><i
+            class="fas fa-fw fa-plus"></i></a>
+      </div>
 
-    <div>
-      <mat-form-field class="dropdown">
-        <mat-label>Aparelhos</mat-label>
-        <mat-select [(value)]="servicoAlterado.aparelho">
-          <mat-option *ngFor="let aparelho of aparelhos" [value]="aparelho._id">
-            {{aparelho.nome}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-        <a mat-button color="primary" (click)="openDialogAparelho(servicoAlterado.aparelho)" matTooltip="Ver página de detalhes do aparelho"><i class="fas fa-fw fa-external-link-alt"></i></a>
-        <a mat-button color="primary" (click)="openDialogAparelho()" matTooltip="Cadastrar novo aparelho"><i class="fas fa-fw fa-plus"></i></a>
-    </div>
+      <div>
+        <mat-form-field class="dropdown">
+          <mat-label>Aparelhos</mat-label>
+          <mat-select [(value)]="servicoAlterado.aparelho">
+            <mat-option *ngFor="let aparelho of aparelhos" [value]="aparelho._id">
+              {{aparelho.nome}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <a mat-button color="primary" (click)="openDialogAparelho(servicoAlterado.aparelho)"
+          matTooltip="Ver página de detalhes do aparelho"><i class="fas fa-fw fa-external-link-alt"></i></a>
+        <a mat-button color="primary" (click)="openDialogAparelho()" matTooltip="Cadastrar novo aparelho"><i
+            class="fas fa-fw fa-plus"></i></a>
+      </div>
 
-    <div>
-      <mat-form-field class="dropdown">
-        <mat-label>Problema</mat-label>
-        <mat-select [(value)]="servicoAlterado.problema">
-          <mat-option *ngFor="let problema of problemas" [value]="problema._id">
-            {{problema.descricao}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-        <a mat-button color="primary" (click)="openDialogProblema(servicoAlterado.problema)" matTooltip="Ver página de detalhes do problema"><i class="fas fa-fw fa-external-link-alt"></i></a>
-        <a mat-button color="primary" (click)="openDialogProblema()" matTooltip="Cadastrar novo problema"><i class="fas fa-fw fa-plus"></i></a>
-    </div>
+      <div>
+        <mat-form-field class="dropdown">
+          <mat-label>Problema</mat-label>
+          <mat-select [(value)]="servicoAlterado.problema">
+            <mat-option *ngFor="let problema of problemas" [value]="problema._id">
+              {{problema.descricao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <a mat-button color="primary" (click)="openDialogProblema(servicoAlterado.problema)"
+          matTooltip="Ver página de detalhes do problema"><i class="fas fa-fw fa-external-link-alt"></i></a>
+        <a mat-button color="primary" (click)="openDialogProblema()" matTooltip="Cadastrar novo problema"><i
+            class="fas fa-fw fa-plus"></i></a>
+      </div>
 
-    <mat-form-field class="inputs">
-      <mat-label>Situação</mat-label>
-      <input name="situacao" matInput [(ngModel)]="servicoAlterado.situacao">
-    </mat-form-field><br>
+      <div>
+        <mat-form-field class="inputs">
+          <mat-label>Situação</mat-label>
+          <mat-select [(value)]="servicoAlterado.situacao">
+            <mat-option *ngFor="let sit of situacao" [value]="sit">
+              {{sit}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-    <mat-form-field class="inputs">
-      <mat-label>Valor</mat-label>
-      <input name="valor" type="number" matInput [(ngModel)]="servicoAlterado.valor">
-    </mat-form-field><br>
+      <mat-form-field class="inputs">
+        <mat-label>Valor</mat-label>
+        <input name="valor" type="number" matInput [(ngModel)]="servicoAlterado.valor">
+      </mat-form-field><br>
 
-    <mat-form-field class="inputs">
-      <mat-label>Observações</mat-label>
-      <textarea name="obs" matInput [(ngModel)]="servicoAlterado.observacao" style="resize: none;" rows="3"></textarea>
-    </mat-form-field><br>
-  </form>
+      <mat-form-field class="inputs">
+        <mat-label>Observações</mat-label>
+        <textarea name="obs" matInput [(ngModel)]="servicoAlterado.observacao" style="resize: none;"
+          rows="3"></textarea>
+      </mat-form-field><br>
+    </form>
 
-  <button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarServico()">
-    <i class="fas fa-fw fa-check"></i> Cadastrar Serviço
-  </button>
-  <button *ngIf="!modoCadastro" mat-raised-button color="primary" (click)="alterarServico()">
-    <i class="fas fa-fw fa-check"></i> Salvar Alterações
-  </button>&nbsp;&nbsp;
-  <button *ngIf="!modoCadastro" mat-raised-button color="warn" (click)="deletarServico()">
-    <i class="fas fa-fw fa-trash"></i> Excluir
-  </button>&nbsp;&nbsp;
-  <button mat-raised-button (click)="fechar()">
-    <i class="fas fa-fw fa-times"></i> Fechar
-  </button>
-</div>
+  </mat-tab>
+  <mat-tab label="Peças" *ngIf="!modoCadastro">
+    <h2> Lista de peças ({{ pecas.length }})</h2>
+
+    <mat-nav-list>
+      <div *ngFor="let peca of pecas; let i = index">
+        <div class="dropdown" style="display: inline-block;">
+          <span mat-list-item>
+            {{ i + 1 }} - {{ peca.descricao }} - {{ peca.preco?peca.preco:peca.valor }}
+          </span>
+        </div>
+        <div style="display: inline-block;">
+          <a mat-button color="primary" (click)="openDialogPeca(peca)" matTooltip="Ver detalhes da peça"><i
+              class="fas fa-fw fa-external-link-alt"></i></a>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <br>
+    </mat-nav-list>
+
+  </mat-tab>
+  <mat-tab label="Histórico" *ngIf="!modoCadastro">
+    <h2> Histórico da situação</h2>
+  </mat-tab>
+</mat-tab-group>
+
+<button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarServico()">
+  <i class="fas fa-fw fa-check"></i> Cadastrar Serviço
+</button>
+<button *ngIf="!modoCadastro" mat-raised-button color="primary" (click)="alterarServico()">
+  <i class="fas fa-fw fa-check"></i> Salvar Alterações
+</button>&nbsp;&nbsp;
+<button *ngIf="!modoCadastro" mat-raised-button color="warn" (click)="deletarServico()">
+  <i class="fas fa-fw fa-trash"></i> Excluir
+</button>&nbsp;&nbsp;
+<button mat-raised-button (click)="fechar()">
+  <i class="fas fa-fw fa-times"></i> Fechar
+</button>

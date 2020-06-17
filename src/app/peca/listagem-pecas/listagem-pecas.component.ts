@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GerirPecaComponent } from '../gerir-peca/gerir-peca.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogService } from 'src/app/shared/service/dialog.service';
 
 @Component({
   selector: 'app-listagem-pecas',
@@ -20,7 +21,7 @@ export class ListagemPecasComponent implements OnInit {
 
   constructor(
     private pecaService: PecaService,
-    private dialog: MatDialog,
+    private dialogService: DialogService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -45,7 +46,7 @@ export class ListagemPecasComponent implements OnInit {
   }
 
   public openDialog(peca: Peca = new Peca()) {
-    const dialogRef = this.dialog.open(GerirPecaComponent, { data: peca });
+    const dialogRef = this.dialogService.openDialogPeca(peca)
 
     dialogRef.afterClosed().subscribe(() => {
       this.listarPecas();

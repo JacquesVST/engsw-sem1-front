@@ -8,7 +8,7 @@ import { ListagemProblemasComponent } from './problema/listagem-problemas/listag
 import { ListagemServicosComponent } from './servico/listagem-servicos/listagem-servicos.component';
 import { ListagemPecasComponent } from './peca/listagem-pecas/listagem-pecas.component';
 import { ListagemProdutosComponent } from './produto/listagem-produtos/listagem-produtos.component';
-
+import { ListagemVendasComponent } from './venda/listagem-vendas/listagem-vendas.component';
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'cliente', component: ListagemClientesComponent },
@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'problema', component: ListagemProblemasComponent },
   { path: 'servico', component: ListagemServicosComponent },
   { path: 'peca', component: ListagemPecasComponent },
-  { path: 'produto', component: ListagemProdutosComponent }
+  { path: 'produto', component: ListagemProdutosComponent },
+  { path: 'venda', component: ListagemVendasComponent }
 ];
 
 @NgModule({

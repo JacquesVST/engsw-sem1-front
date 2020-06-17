@@ -1,0 +1,51 @@
+<div>
+  <h2>{{ modoCadastro ? 'Cadastrar nova venda' : 'Informações da venda' }}</h2>
+  <form class="inputs" autocomplete="off">
+
+    <div>
+      <mat-form-field class="dropdown">
+        <mat-label>Produto</mat-label>
+        <mat-select [(value)]="vendaAlterado.produto">
+          <mat-option *ngFor="let produto of produtos" [value]="produto._id">
+            {{produto.descricao}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <a mat-button color="primary" (click)="openDialogProduto(vendaAlterado.produto)" matTooltip="Ver página de detalhes do produto"><i class="fas fa-fw fa-external-link-alt"></i></a>
+      <a mat-button color="primary" (click)="openDialogProduto()" matTooltip="Cadastrar novo produto"><i class="fas fa-fw fa-plus"></i></a>
+    </div>
+
+    <mat-form-field class="inputs">
+      <mat-label>Data</mat-label>
+      <input type="date" name="data" matInput [(ngModel)]="vendaAlterado.data">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Valor</mat-label>
+      <input name="valor" type="number" matInput [(ngModel)]="vendaAlterado.valor">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Quantidade</mat-label>
+      <input name="quantidade" type="number" matInput [(ngModel)]="vendaAlterado.quantidade">
+    </mat-form-field><br>
+
+    <mat-form-field class="inputs">
+      <mat-label>Observações</mat-label>
+      <textarea name="obs" matInput [(ngModel)]="vendaAlterado.observacao" style="resize: none;" rows="3"></textarea>
+    </mat-form-field><br>
+  </form>
+
+  <button *ngIf="modoCadastro" mat-raised-button color="primary" (click)="cadastrarVenda()">
+    <i class="fas fa-fw fa-check"></i> Cadastrar Venda
+  </button>
+  <button *ngIf="!modoCadastro" mat-raised-button color="primary" (click)="alterarVenda()">
+    <i class="fas fa-fw fa-check"></i> Salvar Alterações
+  </button>&nbsp;&nbsp;
+  <button *ngIf="!modoCadastro" mat-raised-button color="warn" (click)="deletarVenda()">
+    <i class="fas fa-fw fa-trash"></i> Excluir
+  </button>&nbsp;&nbsp;
+  <button mat-raised-button (click)="fechar()">
+    <i class="fas fa-fw fa-times"></i> Fechar
+  </button>
+</div>

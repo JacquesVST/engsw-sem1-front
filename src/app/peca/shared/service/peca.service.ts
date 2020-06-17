@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Peca } from '../model/peca.model';
@@ -13,11 +13,11 @@ export class PecaService {
   constructor(private http: HttpClient) { }
 
   public listarPecas(): Observable<Peca[]> {
-    return this.http.get<Peca[]>(`${this.path}/listar`,);
+    return this.http.get<Peca[]>(`${this.path}/listar`);
   }
 
   public buscarPeca(id: string): Observable<Peca> {
-    return this.http.get<Peca>(`${this.path}/buscar/${id}`,);
+    return this.http.get<Peca>(`${this.path}/buscar/${id}`);
   }
 
   public cadastrarPeca(peca: PecaDTO): Observable<Peca> {
@@ -30,6 +30,10 @@ export class PecaService {
 
   public deletarPeca(peca: PecaDTO): Observable<Peca> {
     return this.http.delete<Peca>(`${this.path}/deletar/${peca._id}`);
+  }
+
+  public filtrarPecas(filtro: any = {}, ordem: any = {}): Observable<Peca[]> {
+    return this.http.get<Peca[]>(`${this.path}/filtrar/?filtro=${encodeURIComponent( JSON.stringify(filtro))}`);
   }
 
 

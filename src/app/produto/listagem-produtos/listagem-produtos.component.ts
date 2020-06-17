@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { GerirProdutoComponent } from '../gerir-produto/gerir-produto.component';
 import { Produto } from '../shared/model/produto.model';
 import { ProdutoService } from '../shared/service/produto.service';
+import { DialogService } from 'src/app/shared/service/dialog.service';
 
 @Component({
   selector: 'app-listagem-produtos',
@@ -20,7 +21,7 @@ export class ListagemProdutosComponent implements OnInit {
 
   constructor(
     private produtoService: ProdutoService,
-    private dialog: MatDialog,
+    private dialogService: DialogService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -45,7 +46,7 @@ export class ListagemProdutosComponent implements OnInit {
   }
 
   public openDialog(produto: Produto = new Produto()) {
-    const dialogRef = this.dialog.open(GerirProdutoComponent, { data: produto });
+    const dialogRef = this.dialogService.openDialogProduto(produto)
 
     dialogRef.afterClosed().subscribe(() => {
       this.listarProdutos();

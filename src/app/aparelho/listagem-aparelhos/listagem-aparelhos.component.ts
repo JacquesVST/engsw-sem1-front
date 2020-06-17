@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Aparelho } from '../shared/model/aparelho.model';
-import { AparelhoService } from '../shared/service/aparelho.service';
 import { MatDialog } from '@angular/material/dialog';
-import { GerirAparelhoComponent } from '../gerir-aparelho/gerir-aparelho.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { GerirAparelhoComponent } from '../gerir-aparelho/gerir-aparelho.component';
+import { Aparelho } from '../shared/model/aparelho.model';
+import { AparelhoService } from '../shared/service/aparelho.service';
+import { DialogService } from 'src/app/shared/service/dialog.service';
 
 @Component({
   selector: 'app-listagem-aparelhos',
@@ -16,11 +17,11 @@ export class ListagemAparelhosComponent implements OnInit {
   public aparelhos: Aparelho[] = [];
   public dados: MatTableDataSource<Aparelho>;
   public aparelhoSelecionado: Aparelho = new Aparelho();
-  public displayedColumns: string[] = ['nome', 'modelo', 'fabricante','fichaTecnica', 'acoes'];
+  public displayedColumns: string[] = ['nome', 'modelo', 'fabricante', 'fichaTecnica', 'acoes'];
 
   constructor(
     private aparelhoService: AparelhoService,
-    private dialog: MatDialog,
+    private dialogService: DialogService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -45,14 +46,14 @@ export class ListagemAparelhosComponent implements OnInit {
   }
 
   public openDialog(aparelho: Aparelho = new Aparelho()) {
-    const dialogRef = this.dialog.open(GerirAparelhoComponent, { data: aparelho });
+    const dialogRef = this.dialogService.openDialogAparelho(aparelho);
 
     dialogRef.afterClosed().subscribe(() => {
       this.listarAparelhos();
     });
   }
 
-  public obterSite(site: string): string{
+  public obterSite(site: string): string {
     site.replace('http://', '');
     site.replace('https://', '');
     return site;

@@ -1,15 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GerirAparelhoComponent } from 'src/app/aparelho/gerir-aparelho/gerir-aparelho.component';
 import { Aparelho } from 'src/app/aparelho/shared/model/aparelho.model';
 import { AparelhoService } from 'src/app/aparelho/shared/service/aparelho.service';
-import { GerirClienteComponent } from 'src/app/cliente/gerir-cliente/gerir-cliente.component';
 import { Cliente } from 'src/app/cliente/shared/model/cliente.model';
 import { ClienteService } from 'src/app/cliente/shared/service/cliente.service';
-import { GerirProblemaComponent } from 'src/app/problema/gerir-problema/gerir-problema.component';
+import { Peca } from 'src/app/peca/shared/model/peca.model';
+import { PecaService } from 'src/app/peca/shared/service/peca.service';
 import { Problema } from 'src/app/problema/shared/model/problema.model';
 import { ProblemaService } from 'src/app/problema/shared/service/problema.service';
+import { DialogService } from 'src/app/shared/service/dialog.service';
 import { Servico } from '../shared/model/servico.model';
 import { ServicoDTO } from '../shared/model/servicoDTO.model';
 import { ServicoService } from '../shared/service/servico.service';
@@ -24,6 +24,8 @@ export class GerirServicoComponent implements OnInit {
   public clientes: Cliente[] = [];
   public aparelhos: Aparelho[] = [];
   public problemas: Problema[] = [];
+  public situacao: string[] = [];
+  public pecas: Peca[] = [];
   public servicoAlterado: ServicoDTO = new ServicoDTO();
   public modoCadastro: boolean;
 
@@ -33,9 +35,25 @@ export class GerirServicoComponent implements OnInit {
     private clienteService: ClienteService,
     private aparelhoService: AparelhoService,
     private problemaService: ProblemaService,
-    private dialog: MatDialog,
+    private pecaService: PecaService,
+    private dialogService: DialogService,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<GerirServicoComponent>) { }
+    private dialogRef: MatDialogRef<GerirServicoComponent>
+  ) {
+    this.situacao = [
+      'Solicitado',
+      'Em Análise',
+      'Aceito',
+      'Rejeitado',
+      'Aguardando Peças',
+      'Iniciado',
+      'Em Progresso',
+      'Com Impedimento',
+      'Aguardando Resposta',
+      'Finalizado',
+      'Entregue'
+    ]
+  }
 
   ngOnInit(): void {
     this.listarClientes();
@@ -43,19 +61,21 @@ export class GerirServicoComponent implements OnInit {
     this.listarProblemas();
     if (!this.servico._id) {
       this.modoCadastro = true;
+    } else {
+      this.listarPecas();
     }
     this.servicoAlterado = this.converterServico(this.servico);
   }
 
-    public listarClientes(): void {
-      this.clienteService.listarClientes()
-        .subscribe(response => {
-          this.clientes = response['clientes'];
-        }, (err) => {
-          let erro = this.snackBar.open('Erro ao listar clientes');
-          console.log(err);
-        });
-    }
+  public listarClientes(): void {
+    this.clienteService.listarClientes()
+      .subscribe(response => {
+        this.clientes = response['clientes'];
+      }, (err) => {
+        let erro = this.snackBar.open('Erro ao listar clientes');
+        console.log(err);
+      });
+  }
 
   public listarAparelhos(): void {
     this.aparelhoService.listarAparelhos()
@@ -73,6 +93,16 @@ export class GerirServicoComponent implements OnInit {
         this.problemas = response['problemas'];
       }, (err) => {
         let erro = this.snackBar.open('Erro ao listar problemas');
+        console.log(err);
+      });
+  }
+
+  public listarPecas(): void {
+    this.pecaService.filtrarPecas({ servico: this.servico._id })
+      .subscribe(response => {
+        this.pecas = response['pecas'];
+      }, (err) => {
+        let erro = this.snackBar.open('Erro ao listar pecas do servico');
         console.log(err);
       });
   }
@@ -118,14 +148,14 @@ export class GerirServicoComponent implements OnInit {
     if (idCliente) {
       this.clienteService.buscarCliente(idCliente)
         .subscribe(response => {
-          const dialogRef = this.dialog.open(GerirClienteComponent, { data: response['cliente'] });
+          const dialogRef = this.dialogService.openDialogCliente(response['cliente']);
 
           dialogRef.afterClosed().subscribe(() => {
             this.listarClientes();
           });
         });
     } else {
-      const dialogRef = this.dialog.open(GerirClienteComponent, { data: new Cliente() });
+      const dialogRef = this.dialogService.openDialogCliente();
 
       dialogRef.afterClosed().subscribe(() => {
         this.listarClientes();
@@ -137,14 +167,14 @@ export class GerirServicoComponent implements OnInit {
     if (idAparelho) {
       this.aparelhoService.buscarAparelho(idAparelho)
         .subscribe(response => {
-          const dialogRef = this.dialog.open(GerirAparelhoComponent, { data: response['aparelho'] });
+          const dialogRef = this.dialogService.openDialogAparelho(response['aparelho']);
 
           dialogRef.afterClosed().subscribe(() => {
             this.listarAparelhos();
           });
         });
     } else {
-      const dialogRef = this.dialog.open(GerirAparelhoComponent, { data: new Aparelho() });
+      const dialogRef = this.dialogService.openDialogAparelho();
 
       dialogRef.afterClosed().subscribe(() => {
         this.listarAparelhos();
@@ -156,19 +186,28 @@ export class GerirServicoComponent implements OnInit {
     if (idProblema) {
       this.problemaService.buscarProblema(idProblema)
         .subscribe(response => {
-          const dialogRef = this.dialog.open(GerirProblemaComponent, { data: response['problema'] });
+          const dialogRef = this.dialogService.openDialogProblema(response['problema']);
 
           dialogRef.afterClosed().subscribe(() => {
             this.listarProblemas();
           });
         });
     } else {
-      const dialogRef = this.dialog.open(GerirProblemaComponent, { data: new Problema() });
+      const dialogRef = this.dialogService.openDialogProblema();
 
       dialogRef.afterClosed().subscribe(() => {
         this.listarProblemas();
       });
     }
+  }
+
+  public openDialogPeca(peca: Peca = new Peca()) {
+    const dialogRef = this.dialogService.openDialogPeca(peca);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.listarPecas();
+    });
+
   }
 
   public converterServico(servico: Servico): ServicoDTO {

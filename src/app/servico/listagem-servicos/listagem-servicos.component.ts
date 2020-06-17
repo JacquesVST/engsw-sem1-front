@@ -31,7 +31,6 @@ export class ListagemServicosComponent implements OnInit {
   public listarServicos(): void {
     this.servicoService.listarServicos()
       .subscribe(response => {
-        console.log(response)
         this.servicos = response['servicos'];
         this.dados = new MatTableDataSource(this.servicos);
       }, (err) => {

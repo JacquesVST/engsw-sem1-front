@@ -7,6 +7,7 @@ import { Aparelho } from '../shared/model/aparelho.model';
 import { AparelhoService } from '../shared/service/aparelho.service';
 import { AparelhoDTO } from '../shared/model/aparelhoDTO.model';
 import { GerirFabricanteComponent } from 'src/app/fabricante/gerir-fabricante/gerir-fabricante.component';
+import { DialogService } from 'src/app/shared/service/dialog.service';
 
 @Component({
   selector: 'app-gerir-aparelho',
@@ -23,6 +24,7 @@ export class GerirAparelhoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public aparelho: Aparelho,
     private aparelhoService: AparelhoService,
     private fabricanteService: FabricanteService,
+    private dialogService: DialogService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<GerirAparelhoComponent>) { }
@@ -86,14 +88,14 @@ export class GerirAparelhoComponent implements OnInit {
     if (idFabricante) {
       this.fabricanteService.buscarFabricante(idFabricante)
         .subscribe(response => {
-          const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: response['fabricante'] });
+          const dialogRef = this.dialogService.openDialogFabricante(response['fabricante']);
 
           dialogRef.afterClosed().subscribe(() => {
             this.listarFabricantes();
           });
         });
     } else {
-      const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: new Fabricante() });
+      const dialogRef = this.dialogService.openDialogFabricante()
 
       dialogRef.afterClosed().subscribe(() => {
         this.listarFabricantes();

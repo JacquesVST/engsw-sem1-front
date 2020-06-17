@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Fabricante } from '../shared/model/fabricante.model';
-import { FabricanteService } from '../shared/service/fabricante.service';
-import { MatDialog } from '@angular/material/dialog';
-import { GerirFabricanteComponent } from '../gerir-fabricante/gerir-fabricante.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogService } from 'src/app/shared/service/dialog.service';
+import { Fabricante } from '../shared/model/fabricante.model';
+import { FabricanteService } from '../shared/service/fabricante.service';
 
 @Component({
   selector: 'app-listagem-fabricantes',
@@ -20,7 +19,7 @@ export class ListagemFabricantesComponent implements OnInit {
 
   constructor(
     private fabricanteService: FabricanteService,
-    private dialog: MatDialog,
+    private dialogService: DialogService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -45,7 +44,7 @@ export class ListagemFabricantesComponent implements OnInit {
   }
 
   public openDialog(fabricante: Fabricante = new Fabricante()) {
-    const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: fabricante });
+    const dialogRef = this.dialogService.openDialogFabricante(fabricante);
 
     dialogRef.afterClosed().subscribe(() => {
       this.listarFabricantes();

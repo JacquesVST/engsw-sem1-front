@@ -26,10 +26,16 @@
       <input name="preco" type="number" matInput [(ngModel)]="produtoAlterado.preco">
     </mat-form-field><br>
 
-    <mat-form-field class="inputs">
-      <mat-label>Categoria</mat-label>
-      <input name="categoria" type="number" matInput [(ngModel)]="produtoAlterado.categoria">
-    </mat-form-field><br>
+    <div>
+      <mat-form-field class="inputs">
+        <mat-label>Categoria</mat-label>
+        <mat-select [(value)]="produtoAlterado.categoria">
+          <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+            {{categoria}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
     <mat-form-field class="inputs">
       <mat-label>Estoque</mat-label>
@@ -40,7 +46,8 @@
       <mat-label>Origem</mat-label>
       <input name="origem" matInput placeholder="https://www.mercadolivre.com.br/" [(ngModel)]="produtoAlterado.origem">
     </mat-form-field>
-    <a mat-button color="primary" [href]="produtoAlterado.origem" target="_blank" matTooltip="Visitar" *ngIf="produtoAlterado.origem"><i class="fas fa-fw fa-question"></i></a>
+    <a mat-button color="primary" [href]="produtoAlterado.origem" target="_blank" matTooltip="Visitar"
+      *ngIf="produtoAlterado.origem"><i class="fas fa-fw fa-question"></i></a>
     <br>
 
     <mat-form-field class="inputs">

@@ -11,7 +11,7 @@
   </div>
 
   <mat-form-field style="width:100%">
-    <mat-label>Filtrar</mat-label>
+    <mat-label><i class="fas fa-fw fa-search"></i> Filtrar</mat-label>
     <input matInput (keyup)="applyFilter($event)">
   </mat-form-field>
   <table *ngIf="produtos" mat-table [dataSource]="dados">

@@ -1,15 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Fabricante } from 'src/app/fabricante/shared/model/fabricante.model';
 import { FabricanteService } from 'src/app/fabricante/shared/service/fabricante.service';
-import { Peca } from '../shared/model/peca.model';
-import { PecaService } from '../shared/service/peca.service';
-import { PecaDTO } from '../shared/model/pecaDTO.model';
-import { GerirFabricanteComponent } from 'src/app/fabricante/gerir-fabricante/gerir-fabricante.component';
 import { Servico } from 'src/app/servico/shared/model/servico.model';
 import { ServicoService } from 'src/app/servico/shared/service/servico.service';
-import { GerirServicoComponent } from 'src/app/servico/gerir-servico/gerir-servico.component';
+import { DialogService } from 'src/app/shared/service/dialog.service';
+import { Peca } from '../shared/model/peca.model';
+import { PecaDTO } from '../shared/model/pecaDTO.model';
+import { PecaService } from '../shared/service/peca.service';
+// import { GerirServicoComponent } from 'src/app/servico/gerir-servico/gerir-servico.component';
 
 @Component({
   selector: 'app-gerir-peca',
@@ -28,6 +28,7 @@ export class GerirPecaComponent implements OnInit {
     private pecaService: PecaService,
     private fabricanteService: FabricanteService,
     private servicoService: ServicoService,
+    private dialogService: DialogService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<GerirPecaComponent>) { }
@@ -102,14 +103,14 @@ export class GerirPecaComponent implements OnInit {
     if (idFabricante) {
       this.fabricanteService.buscarFabricante(idFabricante)
         .subscribe(response => {
-          const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: response['fabricante'] });
+          const dialogRef = this.dialogService.openDialogFabricante(response['fabricante']);
 
           dialogRef.afterClosed().subscribe(() => {
             this.listarFabricantes();
           });
         });
     } else {
-      const dialogRef = this.dialog.open(GerirFabricanteComponent, { data: new Fabricante() });
+      const dialogRef = this.dialogService.openDialogFabricante();
 
       dialogRef.afterClosed().subscribe(() => {
         this.listarFabricantes();
@@ -121,14 +122,14 @@ export class GerirPecaComponent implements OnInit {
     if (idServico) {
       this.servicoService.buscarServico(idServico)
         .subscribe(response => {
-          const dialogRef = this.dialog.open(GerirServicoComponent, { data: response['servico'] });
+          const dialogRef = this.dialogService.openDialogServico(response['servico']);
 
           dialogRef.afterClosed().subscribe(() => {
             this.listarServicos();
           });
         });
     } else {
-      const dialogRef = this.dialog.open(GerirServicoComponent, { data: new Servico() });
+      const dialogRef = this.dialogService.openDialogServico();
 
       dialogRef.afterClosed().subscribe(() => {
         this.listarServicos();

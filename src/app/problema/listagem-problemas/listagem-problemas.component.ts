@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GerirProblemaComponent } from '../gerir-problema/gerir-problema.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogService } from 'src/app/shared/service/dialog.service';
 
 @Component({
   selector: 'app-listagem-problemas',
@@ -21,7 +22,7 @@ export class ListagemProblemasComponent implements OnInit {
 
   constructor(
     private problemaService: ProblemaService,
-    private dialog: MatDialog,
+    private dialogService: DialogService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -46,7 +47,7 @@ export class ListagemProblemasComponent implements OnInit {
   }
 
   public openDialog(problema: Problema = new Problema()) {
-    const dialogRef = this.dialog.open(GerirProblemaComponent, { data: problema });
+    const dialogRef = this.dialogService.openDialogProblema(problema);
 
     dialogRef.afterClosed().subscribe(() => {
       this.listarProblemas();

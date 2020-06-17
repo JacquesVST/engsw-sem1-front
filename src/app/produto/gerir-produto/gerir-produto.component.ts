@@ -12,13 +12,25 @@ import { ProdutoService } from '../shared/service/produto.service';
 export class GerirProdutoComponent implements OnInit {
 
   public produtoAlterado: Produto = new Produto();
+  public categorias: string[] = [];
   public modoCadastro: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public produto: Produto,
     private produtoService: ProdutoService,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<GerirProdutoComponent>) { }
+    private dialogRef: MatDialogRef<GerirProdutoComponent>
+  ) {
+    this.categorias = [
+      'Acessórios',
+      'Áudio',
+      'Cabos',
+      'Capas',
+      'Carregadores',
+      'Películas',
+      'Suportes'
+    ]
+  }
 
   ngOnInit(): void {
     if (!this.produto._id) {

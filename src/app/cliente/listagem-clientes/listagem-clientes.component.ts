@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../shared/model/cliente.model';
-import { ClienteService } from '../shared/service/cliente.service';
-import { MatDialog } from '@angular/material/dialog';
-import { GerirClienteComponent } from '../gerir-cliente/gerir-cliente.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogService } from 'src/app/shared/service/dialog.service';
+import { Cliente } from '../shared/model/cliente.model';
+import { ClienteService } from '../shared/service/cliente.service';
 
 @Component({
   selector: 'app-listagem-clientes',
@@ -21,7 +20,7 @@ export class ListagemClientesComponent implements OnInit {
 
   constructor(
     private clienteService: ClienteService,
-    private dialog: MatDialog,
+    private dialogService: DialogService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -46,10 +45,10 @@ export class ListagemClientesComponent implements OnInit {
   }
 
   public openDialog(cliente: Cliente = new Cliente()) {
-    const dialogRef = this.dialog.open(GerirClienteComponent, { data: cliente });
+    const dialogRef = this.dialogService.openDialogCliente(cliente);
 
     dialogRef.afterClosed().subscribe(() => {
-      this.listarClientes();
+      this.listarClientes
     });
   }
 

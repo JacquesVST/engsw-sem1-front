@@ -7,7 +7,7 @@
     </mat-form-field><br>
 
     <div>
-      <mat-form-field class="dropdown">
+      <mat-form-field class="link">
         <mat-label>Serviço</mat-label>
         <mat-select [(value)]="pecaAlterado.servico">
           <mat-option *ngFor="let servico of servicos" [value]="servico._id">
@@ -15,7 +15,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-        <a mat-button color="primary" (click)="openDialogServico(pecaAlterado.servico)" matTooltip="Ver página de detalhes do fabricante"><i class="fas fa-fw fa-external-link-alt"></i></a>
+        <a mat-button color="primary" (click)="openDialogServico(pecaAlterado.servico)" matTooltip="Ver página de detalhes do serviço"><i class="fas fa-fw fa-external-link-alt"></i></a>
         <a mat-button color="primary" (click)="openDialogServico()" matTooltip="Cadastrar novo serviço"><i class="fas fa-fw fa-plus"></i></a>
     </div>
 
